@@ -43,7 +43,7 @@ export const signupUser = async (req, res) => {
       });
     }
   } catch (error) {
-    logError(error);
+    console.log(error);
     res
       .status(500)
       .json({ success: false, msg: `Unable to create user, ${error}` });
@@ -67,7 +67,7 @@ export const loginUser = async (req, res) => {
       token,
     });
   } catch (error) {
-    logError(error);
+    console.log(error);
     res
       .status(500)
       .json({ success: false, msg: `Unable to login user: ${error.message}` });
