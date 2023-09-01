@@ -1,14 +1,15 @@
+import { useState } from 'react';
 import { useAuthContext } from './useAuthContext';
 
 export const useSignup = () => {
   const { dispatch } = useAuthContext();
-  let error = null;
+  const [error, setError] = useState(null);
 
   const signUp = async user => {
     const { firstName, lastName, email, password } = user;
-    const apiPath = process.env;
-    console.log(apiPath);
-    const jsonResult = await fetch(`http://localhost:5000/api/auth/signup`, {
+    const apiPath = process.env.REACT_APP_API_PATH;
+
+    const jsonResult = await fetch(`${apiPath}/auth/signup`, {
       method: 'POST',
       headers: {
         'content-type': 'application/json',
@@ -24,11 +25,13 @@ export const useSignup = () => {
     });
 
     const userResult = await jsonResult.json();
+    // console.log(userResult);
     if (userResult.success) {
       localStorage.setItem('auth', JSON.stringify(userResult));
       dispatch({ type: 'LOGIN', payload: userResult });
+      setError(null);
     } else {
-      error = userResult.msg;
+      setError(userResult.msg);
     }
   };
 
