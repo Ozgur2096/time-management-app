@@ -1,8 +1,10 @@
 import React, { useState, useEffect } from 'react';
 import { useSignup } from '../hooks/useSignup';
+import { useLogin } from '../hooks/useLogin';
 
 export const LoginSignup = () => {
   const { signUp, error } = useSignup();
+  const { login, errorLogin } = useLogin();
   const [message, setMessage] = useState(error);
   const [isSignup, setIsSignUp] = useState(false);
   const [user, setUser] = useState({
@@ -19,7 +21,8 @@ export const LoginSignup = () => {
 
   const handleSubmit = e => {
     e.preventDefault();
-    signUp(user);
+    console.log(user);
+    isSignup ? signUp(user) : login(user);
   };
 
   return (
@@ -63,20 +66,34 @@ export const LoginSignup = () => {
           ></input>
         </div>
         {isSignup ? (
-          <button type='submit'>Sign Up</button>
+          <>
+            <button type='submit'>Sign Up</button>
+            <p>
+              Do you have an account?{' '}
+              <span
+                onClick={() => {
+                  setIsSignUp(false);
+                }}
+              >
+                Login
+              </span>
+            </p>
+          </>
         ) : (
-          <button type='submit'>Login</button>
+          <>
+            <button type='submit'>Login</button>
+            <p>
+              Don't you have an account?{' '}
+              <span
+                onClick={() => {
+                  setIsSignUp(true);
+                }}
+              >
+                Sign up
+              </span>
+            </p>
+          </>
         )}
-        <p>
-          Don't you have an account?{' '}
-          <span
-            onClick={() => {
-              setIsSignUp(true);
-            }}
-          >
-            Sign up
-          </span>
-        </p>
       </form>
       <div>{message}</div>
     </>
