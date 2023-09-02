@@ -16,32 +16,39 @@ export const LoginSignup = () => {
 
   useEffect(() => {
     setMessage(error);
-    console.log(error);
   }, [error]);
 
   const handleSubmit = e => {
     e.preventDefault();
-    console.log(user);
     isSignup ? signUp(user) : login(user);
   };
 
   return (
-    <>
-      <form onSubmit={handleSubmit}>
-        <h1 className='text-2xl'>{isSignup ? 'Sign Up' : 'Login'}</h1>
+    <div className='flex justify-center items-center min-h-screen bg-gray-100'>
+      <form
+        className='bg-white shadow-md rounded px-8 pt-6 pb-8 mb-4'
+        onSubmit={handleSubmit}
+      >
+        <h1 className='text-2xl mb-4'>{isSignup ? 'Sign Up' : 'Login'}</h1>
         {isSignup && (
           <>
-            <div>
-              <label>First Name</label>
+            <div className='mb-4'>
+              <label className='block text-gray-700 text-sm font-bold mb-2'>
+                First Name
+              </label>
               <input
+                className='shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline'
                 type='text'
                 onChange={e => setUser({ ...user, firstName: e.target.value })}
                 value={user.firstName}
               ></input>
             </div>
-            <div>
-              <label>Last Name</label>
+            <div className='mb-4'>
+              <label className='block text-gray-700 text-sm font-bold mb-2'>
+                Last Name
+              </label>
               <input
+                className='shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline'
                 type='text'
                 onChange={e => setUser({ ...user, lastName: e.target.value })}
                 value={user.lastName}
@@ -49,17 +56,23 @@ export const LoginSignup = () => {
             </div>
           </>
         )}
-        <div>
-          <label>Email</label>
+        <div className='mb-4'>
+          <label className='block text-gray-700 text-sm font-bold mb-2'>
+            Email
+          </label>
           <input
+            className='shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline'
             type='email'
             onChange={e => setUser({ ...user, email: e.target.value })}
             value={user.email}
           ></input>
         </div>
-        <div>
-          <label>Password</label>
+        <div className='mb-4'>
+          <label className='block text-gray-700 text-sm font-bold mb-2'>
+            Password
+          </label>
           <input
+            className='shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline'
             type='password'
             onChange={e => setUser({ ...user, password: e.target.value })}
             value={user.password}
@@ -67,13 +80,17 @@ export const LoginSignup = () => {
         </div>
         {isSignup ? (
           <>
-            <button type='submit'>Sign Up</button>
-            <p>
-              Do you have an account?{' '}
+            <button
+              className='bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline'
+              type='submit'
+            >
+              Sign Up
+            </button>
+            <p className='mt-4'>
+              Already have an account?{' '}
               <span
-                onClick={() => {
-                  setIsSignUp(false);
-                }}
+                className='text-blue-500 cursor-pointer'
+                onClick={() => setIsSignUp(false)}
               >
                 Login
               </span>
@@ -81,13 +98,17 @@ export const LoginSignup = () => {
           </>
         ) : (
           <>
-            <button type='submit'>Login</button>
-            <p>
-              Don't you have an account?{' '}
+            <button
+              className='bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline'
+              type='submit'
+            >
+              Login
+            </button>
+            <p className='mt-4'>
+              Don't have an account?{' '}
               <span
-                onClick={() => {
-                  setIsSignUp(true);
-                }}
+                className='text-blue-500 cursor-pointer'
+                onClick={() => setIsSignUp(true)}
               >
                 Sign up
               </span>
@@ -95,7 +116,7 @@ export const LoginSignup = () => {
           </>
         )}
       </form>
-      <div>{message}</div>
-    </>
+      {message && <div className='text-red-500'>{message}</div>}
+    </div>
   );
 };
