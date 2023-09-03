@@ -10,7 +10,6 @@ export const useLogin = () => {
   const login = async user => {
     const { email, password } = user;
     const apiPath = process.env.REACT_APP_API_PATH;
-    console.log(email, password);
 
     const jsonResult = await fetch(`${apiPath}/auth/login`, {
       method: 'POST',
@@ -32,7 +31,7 @@ export const useLogin = () => {
       dispatch({ type: 'LOGIN', payload: userResult });
       setError(null);
       setTimeout(() => {
-        navigate('/dashboard');
+        navigate('/');
       }, 1000);
     } else {
       setError(userResult.msg);

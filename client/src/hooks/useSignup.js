@@ -33,7 +33,7 @@ export const useSignup = () => {
       dispatch({ type: 'LOGIN', payload: userResult });
       setError(null);
       setTimeout(() => {
-        navigate('/dashboard');
+        navigate('/');
       }, 1000);
     } else {
       setError(userResult.msg);

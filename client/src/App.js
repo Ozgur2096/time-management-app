@@ -6,14 +6,9 @@ import { useAuthContext } from './hooks/useAuthContext';
 
 function App() {
   const { auth } = useAuthContext();
-  console.log(auth);
   return (
     <Routes>
-      <Route path='/' element={<LoginSignup />} />
-      <Route
-        path='/dashboard'
-        element={auth ? <Dashboard /> : <Navigate to='/' />}
-      />
+      <Route path='/' element={auth ? <Dashboard /> : <LoginSignup />} />
     </Routes>
   );
 }
