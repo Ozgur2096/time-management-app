@@ -1,5 +1,11 @@
 import React from 'react';
+import { Navbar } from '../components/Navbar';
 
 export const Dashboard = () => {
-  return <div>DashBoard</div>;
+  return (
+    <div>
+      <Navbar />
+      <div>Dashboard</div>
+    </div>
+  );
 };
